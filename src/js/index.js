@@ -1,6 +1,7 @@
 import Search from "./models/Search"
 import Recipe from "./models/Recipe";
 import * as searchView from './views/searchView'
+import * as recipeView from './views/recipeView'
 import {elements, renderLoader, clearLoader} from "./views/base"
 
 /*Global state of the app
@@ -17,7 +18,7 @@ const state = {}
 */
 const controlSearch = async () => {
     // 1) get query from view
-   const query = searchView.getInput()
+    const query = searchView.getInput()
 
 
     if (query) {
@@ -57,7 +58,6 @@ elements.searchResPages.addEventListener('click', e => {
 })
 
 
-
 /*
 *RECIPE CONTROLLER
 */
@@ -68,6 +68,11 @@ const controlRecipe = async () => {
 
     if (id) {
         //prepare ui for changes
+        recipeView.clearRecipe()
+        renderLoader(elements.recipe)
+
+        //highlight selected search item
+        if (state.search) searchView.highlightSelected(id)
 
         //create new recipe object
         state.recipe = new Recipe(id)
@@ -82,7 +87,8 @@ const controlRecipe = async () => {
             state.recipe.calcServings()
 
             //render recipe
-            console.log(state.recipe)
+            clearLoader()
+            recipeView.renderRecipe(state.recipe)
         } catch (e) {
             alert('error processing recipe!')
         }
