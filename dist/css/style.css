@@ -442,7 +442,7 @@ body {
   flex-direction: column; }
   .shopping__list {
     list-style: none;
-    max-height: 77rem;
+    max-height: 120rem;
     overflow: scroll; }
   .shopping__item {
     display: flex;
