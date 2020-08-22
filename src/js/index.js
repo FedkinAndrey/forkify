@@ -16,8 +16,6 @@ import {elements, renderLoader, clearLoader} from "./views/base"
 * - liked recipes
 */
 const state = {}
-window.state = state
-
 
 /*
 *SEARCH CONTROLLER
@@ -70,7 +68,6 @@ elements.searchResPages.addEventListener('click', e => {
 const controlRecipe = async () => {
     //get id from url
     const id = window.location.hash.replace('#', '')
-    console.log(id)
 
     if (id) {
         //prepare ui for changes
@@ -110,7 +107,6 @@ const controlRecipe = async () => {
 /*
 *LIST CONTROLLER
 */
-
 const controlList = () => {
     //create a new list IF there in none yet
     if (!state.list) state.list = new List()
@@ -189,7 +185,7 @@ window.addEventListener('load', ()=>{
     //restore likes
     state.likes.readStorage()
 
-    //toggle like meny button
+    //toggle like menu button
     likesView.toggleLikeMenu(state.likes.getNumLikes())
 
     //render the existing likes
@@ -217,6 +213,3 @@ elements.recipe.addEventListener('click', e => {
     }
     // console.log(state.recipe)
 })
-
-
-window.l = new List()
